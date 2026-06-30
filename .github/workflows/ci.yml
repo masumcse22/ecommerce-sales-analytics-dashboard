@@ -1,0 +1,162 @@
+name: CI – Olist Analytics Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: "0 3 * * *"   # nightly at 03:00 UTC
+
+jobs:
+  # ── 1. Unit Tests ─────────────────────────────────────────────────────────
+  test:
+    name: Unit Tests (Python 3.11)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tests with coverage
+        run: |
+          pytest tests/ -v \
+            --cov=etl \
+            --cov=forecasting \
+            --cov-report=xml \
+            --cov-report=term-missing
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          fail_ci_if_error: false
+
+  # ── 2. Data Validation (runs only when Olist CSVs are available) ──────────
+  validate-schema:
+    name: Validate Olist CSV Schema
+    runs-on: ubuntu-latest
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check if Olist data is available
+        id: check_data
+        run: |
+          if ls data/raw/olist_orders_dataset.csv 2>/dev/null; then
+            echo "has_data=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_data=false" >> $GITHUB_OUTPUT
+            echo "Olist CSV files not present – skipping ETL smoke test"
+          fi
+
+      - name: Run ETL pipeline
+        if: steps.check_data.outputs.has_data == 'true'
+        env:
+          DB_DRIVER: sqlite
+        run: python main.py --mode etl
+
+      - name: Validate output files
+        if: steps.check_data.outputs.has_data == 'true'
+        run: |
+          python - <<'EOF'
+          import pandas as pd
+          from pathlib import Path
+
+          REQUIRED = {
+              "dim_customer.csv":        ("customer_id", 50),
+              "dim_product.csv":         ("product_id", 10),
+              "dim_seller.csv":          ("seller_id", 10),
+              "fact_orders.csv":         ("order_id", 100),
+              "fact_order_items.csv":    ("order_id", 100),
+              "fact_reviews.csv":        ("review_id", 50),
+              "daily_revenue.csv":       ("ds", 30),
+              "customer_features.csv":   ("customer_unique_id", 50),
+              "product_performance.csv": ("product_id", 10),
+              "state_revenue.csv":       ("customer_state", 5),
+          }
+          base = Path("data/processed")
+          for fname, (pk, min_rows) in REQUIRED.items():
+              p = base / fname
+              assert p.exists(), f"MISSING: {fname}"
+              df = pd.read_csv(p)
+              assert len(df) >= min_rows, f"{fname}: only {len(df)} rows (expected >= {min_rows})"
+              assert pk in df.columns, f"{fname}: missing column '{pk}'"
+              print(f"✓ {fname:<35} {len(df):>7,} rows")
+          print("\nAll outputs validated!")
+          EOF
+
+      - name: Upload processed data as artifact
+        if: steps.check_data.outputs.has_data == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: processed-data-${{ github.run_id }}
+          path: data/processed/
+          retention-days: 7
+
+  # ── 3. Forecast Smoke Test ────────────────────────────────────────────────
+  forecast-smoke:
+    name: ARIMA Forecast Smoke Test
+    runs-on: ubuntu-latest
+    needs: validate-schema
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Download processed data
+        uses: actions/download-artifact@v4
+        with:
+          name: processed-data-${{ github.run_id }}
+          path: data/processed/
+        continue-on-error: true   # artifact won't exist if no Olist data
+
+      - name: Run ARIMA forecast (if daily_revenue.csv exists)
+        run: |
+          if [ -f "data/processed/daily_revenue.csv" ]; then
+            python main.py --mode forecast --method arima
+          else
+            echo "No daily_revenue.csv – generating synthetic test data"
+            python - <<'EOF'
+          import pandas as pd
+          import numpy as np
+          from pathlib import Path
+          Path("data/processed").mkdir(parents=True, exist_ok=True)
+          dates = pd.date_range("2016-10-01","2018-09-30",freq="D")
+          np.random.seed(42)
+          rev = np.clip(np.random.normal(26000,4000,len(dates)),500,None)
+          pd.DataFrame({"ds":dates,"revenue":rev,"num_orders":200,"unique_customers":180,"aov":130}).to_csv("data/processed/daily_revenue.csv",index=False)
+          EOF
+            python main.py --mode forecast --method arima
+          fi
+
+      - name: Validate forecast output
+        run: |
+          python - <<'EOF'
+          import pandas as pd
+          fc = pd.read_csv("data/processed/forecast_arima.csv")
+          assert len(fc) == 12, f"Expected 12 months, got {len(fc)}"
+          assert (fc["forecast"] >= 0).all(), "Negative forecast values found"
+          assert all(fc["forecast_lower"] <= fc["forecast"]), "Lower > forecast"
+          print(f"✓ ARIMA forecast: {len(fc)} months | avg R$ {fc['forecast'].mean():,.0f}/mo")
+          EOF
