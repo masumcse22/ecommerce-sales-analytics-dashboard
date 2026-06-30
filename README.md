@@ -341,7 +341,7 @@ E-Commerce-Sales-Dashboard/
 # 📚 Installation
 
 ```bash
-git clone https://github.com/yourusername/ecommerce-sales-dashboard.git
+git clone https://github.com/masumcse22/ecommerce-sales-analytics-dashboard.git
 
 cd ecommerce-sales-dashboard
 
