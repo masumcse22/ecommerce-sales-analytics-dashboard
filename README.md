@@ -1,14 +1,18 @@
+# 🚀 E-Commerce Sales Analytics Dashboard
+
+### End-to-End Business Intelligence Solution with Python, SQL, Power BI & Time-Series Forecasting
+
 <div align="center">
 
-# 🚀 E-Commerce Sales Intelligence Dashboard
-### AI-Powered Business Intelligence & Sales Forecasting Platform
+<p align="center">
+<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=24&duration=3500&pause=1000&color=36BCF7&center=true&vCenter=true&width=900&lines=Transforming+Raw+Data+into+Business+Intelligence;Python+%7C+SQL+%7C+Power+BI+%7C+Prophet;Interactive+Dashboard+%7C+Revenue+Forecasting;Data-Driven+Decision+Making"/>
+</p>
 
-<img src="https://readme-typing-svg.demolab.com?font=Poppins&weight=700&size=26&duration=3500&pause=1000&color=36BCF7&center=true&vCenter=true&width=900&lines=Business+Intelligence+Project;Python+%7C+SQL+%7C+Power+BI;Sales+Analytics+Dashboard;Revenue+Forecasting+with+Prophet;End-to-End+Data+Analytics+Portfolio"/>
-
-![GitHub stars](https://img.shields.io/github/stars/yourusername/ecommerce-sales-dashboard?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/ecommerce-sales-dashboard?style=for-the-badge)
-![GitHub issues](https://img.shields.io/github/issues/yourusername/ecommerce-sales-dashboard?style=for-the-badge)
-![GitHub license](https://img.shields.io/github/license/yourusername/ecommerce-sales-dashboard?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge\&logo=python)
+![SQL](https://img.shields.io/badge/SQL-Analytics-orange?style=for-the-badge\&logo=postgresql)
+![Power BI](https://img.shields.io/badge/PowerBI-Dashboard-yellow?style=for-the-badge\&logo=powerbi)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Analysis-purple?style=for-the-badge\&logo=pandas)
+![Prophet](https://img.shields.io/badge/Forecasting-Prophet-success?style=for-the-badge)
 
 </div>
 
@@ -16,372 +20,279 @@
 
 # 📖 Project Overview
 
-Modern e-commerce businesses generate millions of transactional records every day.
+In today's competitive e-commerce landscape, organizations generate massive volumes of transactional data every day. However, raw data alone cannot drive business growth—it must be transformed into actionable insights.
 
-Without proper analytics, companies struggle to answer important business questions like:
+This project presents a complete **Business Intelligence (BI) and Data Analytics pipeline** that converts raw e-commerce data into meaningful business insights through data engineering, SQL analytics, interactive Power BI dashboards, and machine learning-based sales forecasting.
 
-- Which products generate the highest revenue?
-- Which customers are likely to churn?
-- Which regions perform best?
-- Why are deliveries delayed?
-- What will revenue look like in the next 90 days?
-
-This project builds a complete Business Intelligence solution that transforms raw transactional data into executive-level insights using Python, SQL, Power BI, and Machine Learning forecasting.
+The solution enables business stakeholders to monitor key performance indicators, evaluate customer behavior, identify sales trends, analyze operational performance, and forecast future revenue to support strategic decision-making.
 
 ---
 
-# 🎯 Project Objectives
+# 🎯 Business Objectives
 
-✔ Build an end-to-end analytics pipeline
+This project aims to answer critical business questions such as:
 
-✔ Clean and transform raw datasets
+* 📈 How is revenue changing over time?
+* 🛒 Which product categories generate the highest sales?
+* 🌍 Which regions contribute the most revenue?
+* 👥 How valuable are returning customers?
+* 🚚 Are deliveries meeting service-level agreements?
+* ⭐ How do customer reviews impact business performance?
+* 📊 What will revenue look like over the next 90 days?
 
-✔ Perform Exploratory Data Analysis
+---
 
-✔ Build SQL analytical queries
+# ✨ Key Features
 
-✔ Create an interactive Power BI Dashboard
+### 📊 Business Intelligence Dashboard
 
-✔ Predict future revenue using Facebook Prophet
+* Executive Sales Overview
+* Revenue Trend Analysis
+* Monthly Growth Analysis
+* Customer Analytics
+* Product Performance
+* Geographic Sales Analysis
+* Payment Method Insights
+* Delivery Performance Monitoring
 
-✔ Generate business recommendations
+### 🐍 Data Analytics
+
+* Data Cleaning
+* Missing Value Treatment
+* Feature Engineering
+* Exploratory Data Analysis
+* Statistical Analysis
+
+### 🗄 SQL Analytics
+
+* Data Modeling
+* KPI Queries
+* Revenue Analysis
+* Customer Analysis
+* Product Analysis
+* Delivery Performance Analysis
+
+### 🔮 Predictive Analytics
+
+* Revenue Forecasting using Prophet
+* Time-Series Analysis
+* Trend Detection
+* Seasonality Analysis
+* Confidence Interval Forecasting
 
 ---
 
 # 🏗 Project Architecture
 
 ```text
-                Kaggle Dataset
-                      │
-                      ▼
-           Python Data Cleaning
-      (Pandas + NumPy + Feature Engineering)
-                      │
-                      ▼
-             SQL Data Warehouse
-        (SQLite / PostgreSQL Database)
-                      │
-                      ▼
-             Business KPI Queries
-                      │
-                      ▼
-             Power BI Dashboard
-                      │
-                      ▼
-          Prophet Revenue Forecast
-                      │
-                      ▼
-         Executive Business Insights
+                Kaggle Olist Dataset
+                        │
+                        ▼
+          Data Cleaning & Preprocessing
+            (Python • Pandas • NumPy)
+                        │
+                        ▼
+              SQL Data Warehouse Layer
+            (SQLite / PostgreSQL)
+                        │
+                        ▼
+             Business KPI Calculations
+                        │
+                        ▼
+            Interactive Power BI Dashboard
+                        │
+                        ▼
+       Prophet Time-Series Forecasting Model
+                        │
+                        ▼
+          Executive Business Recommendations
 ```
 
 ---
 
 # 📂 Dataset
 
-**Dataset:** Brazilian E-Commerce Public Dataset by Olist
+**Brazilian E-Commerce Public Dataset (Olist)**
 
-Features include:
+The dataset contains over **100,000+ real customer orders** across multiple interconnected tables, including:
 
-- Customers
-- Sellers
-- Products
-- Payments
-- Reviews
-- Orders
-- Order Items
-- Geolocation
-- Product Categories
+* Customers
+* Orders
+* Order Items
+* Products
+* Sellers
+* Payments
+* Reviews
+* Geolocation
+* Product Categories
 
-Over **100,000+ real transactions**.
+This dataset closely resembles real-world enterprise transactional systems, making it an excellent foundation for business intelligence and analytics projects.
 
 ---
 
 # 🛠 Technology Stack
 
-| Category | Technology |
-|------------|------------|
-| Language | Python |
-| Data Processing | Pandas |
-| Numerical Analysis | NumPy |
-| Database | PostgreSQL / SQLite |
-| Query Language | SQL |
-| Visualization | Power BI |
-| Forecasting | Facebook Prophet |
-| Notebook | Jupyter |
-| Version Control | Git |
-| IDE | VS Code |
+| Category        | Technologies        |
+| --------------- | ------------------- |
+| Programming     | Python              |
+| Data Analysis   | Pandas, NumPy       |
+| Database        | SQLite / PostgreSQL |
+| Query Language  | SQL                 |
+| Dashboard       | Power BI            |
+| Forecasting     | Prophet             |
+| Development     | Jupyter Notebook    |
+| Version Control | Git & GitHub        |
 
 ---
 
 # 📊 Business KPIs
 
-✔ Total Revenue
+The dashboard tracks multiple business-critical metrics, including:
 
-✔ Monthly Revenue
-
-✔ Average Order Value
-
-✔ Customer Churn Rate
-
-✔ Delivery SLA
-
-✔ Top Product Categories
-
-✔ Customer Lifetime Value
-
-✔ Revenue by State
-
-✔ Payment Method Analysis
-
-✔ Customer Review Score
-
-✔ Delivery Delay
-
-✔ Forecast Revenue (90 Days)
+* 💰 Total Revenue
+* 📦 Total Orders
+* 👥 Total Customers
+* 🛍 Average Order Value (AOV)
+* 📈 Monthly Revenue Growth
+* ⭐ Customer Satisfaction Score
+* 🚚 Delivery SLA Compliance
+* 🌎 Revenue by State
+* 🛒 Top Product Categories
+* 💳 Payment Method Distribution
+* 📉 Customer Churn
+* 🔮 90-Day Revenue Forecast
 
 ---
 
 # 📈 Dashboard Pages
 
-## Executive Dashboard
+## 📌 Executive Overview
 
-- Revenue
-- Orders
-- Customers
-- AOV
-- Monthly Growth
-- Revenue Trend
+* KPI Cards
+* Revenue Trend
+* Monthly Growth
+* Sales Distribution
 
 ---
 
-## Product Analytics
+## 🛒 Product Analytics
 
-- Best Selling Products
-- Revenue by Category
-- Return Rate
-- Product Performance
-
----
-
-## Customer Analytics
-
-- Customer Segmentation
-- Customer Churn
-- Customer Distribution
-- Payment Analysis
+* Best-Selling Categories
+* Revenue by Product
+* Product Performance
+* Category Comparison
 
 ---
 
-## Geographic Analysis
+## 👥 Customer Analytics
 
-- Revenue by State
-- Regional Sales
-- Delivery Delay Map
-
----
-
-## Forecast Dashboard
-
-- Prophet Forecast
-- Confidence Interval
-- Future Revenue Prediction
+* Customer Segmentation
+* Customer Distribution
+* Payment Analysis
+* Customer Purchase Behavior
 
 ---
 
-# 🤖 Machine Learning
+## 🌍 Geographic Analytics
 
-Forecasting Model:
-
-Facebook Prophet
-
-Features
-
-- Trend Detection
-- Weekly Seasonality
-- Monthly Seasonality
-- Holiday Effects
-- Confidence Interval
-
-Forecast Horizon:
-
-> Next 90 Days
+* Revenue by State
+* Regional Sales
+* Delivery Performance
+* Logistics Insights
 
 ---
 
-# 📊 Project Workflow
+## 🔮 Forecast Dashboard
+
+* Revenue Forecast
+* Confidence Intervals
+* Trend Analysis
+* Seasonal Patterns
+
+---
+
+# 📁 Repository Structure
 
 ```text
-Raw CSV Data
+ecommerce-sales-analytics-dashboard/
 
-↓
-
-Data Cleaning
-
-↓
-
-Feature Engineering
-
-↓
-
-Exploratory Data Analysis
-
-↓
-
-SQL Analytics
-
-↓
-
-Power BI Dashboard
-
-↓
-
-Forecasting
-
-↓
-
-Business Insights
-
-↓
-
-Recommendations
-```
-
----
-
-# 📁 Project Structure
-
-```
-E-Commerce-Sales-Dashboard/
-
-│
 ├── data/
 │
 ├── notebooks/
-│      ├── 01_EDA.ipynb
-│      ├── 02_Cleaning.ipynb
-│      ├── 03_Forecasting.ipynb
+│   ├── 01_EDA.ipynb
+│   ├── 02_Data_Cleaning.ipynb
+│   └── 03_Forecasting.ipynb
 │
 ├── sql/
-│      ├── schema.sql
-│      ├── kpi_queries.sql
+│   ├── schema.sql
+│   └── business_queries.sql
 │
 ├── powerbi/
-│      └── dashboard.pbix
+│   └── dashboard.pbix
 │
 ├── outputs/
-│      ├── images/
-│      ├── reports/
-│      └── forecast.csv
+│   ├── dashboard_images/
+│   ├── reports/
+│   └── forecast_results/
 │
 ├── requirements.txt
-│
 ├── README.md
-│
 └── LICENSE
 ```
 
 ---
 
-# 📸 Dashboard Preview
+# 💡 Expected Business Insights
 
-> Add screenshots here
+Upon completion, this project provides actionable insights such as:
 
-| Executive Dashboard |
-|---------------------|
-| ![](images/dashboard1.png) |
-
----
-
-| Product Dashboard |
-|-------------------|
-| ![](images/dashboard2.png) |
+* Identification of high-performing product categories
+* Regional revenue contribution analysis
+* Customer purchasing behavior
+* Delivery efficiency assessment
+* Revenue growth opportunities
+* Customer satisfaction trends
+* Revenue forecasting for strategic planning
 
 ---
 
-| Forecast Dashboard |
-|--------------------|
-| ![](images/dashboard3.png) |
+# 🚀 Future Enhancements
 
----
+Planned improvements include:
 
-# 📈 Expected Business Insights
-
-✔ Top-performing states
-
-✔ Best-selling products
-
-✔ Low-performing categories
-
-✔ Customer purchasing behavior
-
-✔ Delivery bottlenecks
-
-✔ Seasonal sales trends
-
-✔ Revenue growth opportunities
-
-✔ Future revenue forecast
-
----
-
-# 🚀 Future Improvements
-
-- Streamlit Dashboard
-- Real-time Data Pipeline
-- Azure Deployment
-- Docker Support
-- CI/CD using GitHub Actions
-- MLflow Model Tracking
-- Customer Segmentation using Clustering
-- Recommendation System
-- LLM Business Insight Generator
-
----
-
-# 📚 Installation
-
-```bash
-git clone https://github.com/masumcse22/ecommerce-sales-analytics-dashboard.git
-
-cd ecommerce-sales-dashboard
-
-pip install -r requirements.txt
-```
-
----
-
-# ▶ Run
-
-```bash
-python src/main.py
-```
+* Streamlit Web Dashboard
+* MLflow Experiment Tracking
+* Docker Containerization
+* GitHub Actions CI/CD
+* Azure Deployment
+* Customer Segmentation (RFM Analysis)
+* Customer Lifetime Value Prediction
+* Market Basket Analysis
+* Inventory Demand Forecasting
+* AI-Powered Business Insight Generation using LLMs
 
 ---
 
 # 📬 Contact
 
-**Md Masum**
+## **Md Masum**
 
-Business Analyst | Data Analyst | AI Engineer
+**Business Analyst | Data Analyst | AI & Machine Learning Enthusiast**
 
-LinkedIn:
-https://linkedin.com/in/mdm22/
+📧 Email: **[masum.cse2022@gmail.com](mailto:masum.cse2022@gmail.com)**
 
-GitHub:
-https://github.com/masumcse22
+💼 LinkedIn: **https://www.linkedin.com/in/mdm22/**
 
-Portfolio:
-https://masum22.vercel.app/
+💻 GitHub: **https://github.com/masumcse22**
 
-Email:
-masum.cse2022@gmail.com
+🌐 Portfolio: **https://masum22.vercel.app/**
 
 ---
 
 <div align="center">
 
-## ⭐ If you found this project useful, don't forget to star the repository ⭐
+### ⭐ If you found this project valuable, consider giving it a Star!
 
-<img src="https://readme-typing-svg.demolab.com?font=Poppins&size=22&duration=3000&pause=800&color=00FF99&center=true&vCenter=true&width=700&lines=Thanks+for+visiting!;Happy+Coding!;Happy+Learning!"/>
+*"Turning data into decisions through analytics, visualization, and intelligent forecasting."*
 
 </div>
